@@ -4,8 +4,15 @@ from django.contrib.auth.models import User
 
 class Account(models.Model):
 
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='savings_plans')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user')
     amount = models.DecimalField(max_digits=10, decimal_places=2)
+
+
+class Category(models.Model):
+
+    name = models.CharField(max_length=100)
+    description = models.TextField(blank=True, null=True)
+
 
 class Transaction(models.Model):
 
@@ -23,6 +30,7 @@ class Transaction(models.Model):
     amount = models.DecimalField(max_digits=10, decimal_places=2)
     description = models.CharField(max_length=255)
     periodicity = models.CharField(max_length=7, choices=Periodicity.choices)
+    category = models.ForeignKey(User, on_delete=models.CASCADE, related_name='category')
 
     def __str__(self) -> str:
         return f"{self.type.capitalize()}: {self.amount} ({self.description})"
