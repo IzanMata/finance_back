@@ -30,15 +30,15 @@ class Transaction(models.Model):
     amount = models.DecimalField(max_digits=10, decimal_places=2)
     description = models.CharField(max_length=255)
     periodicity = models.CharField(max_length=7, choices=Periodicity.choices)
-    category = models.ForeignKey(User, on_delete=models.CASCADE, related_name='category')
+    account = models.ForeignKey(Account, on_delete=models.CASCADE, related_name='transaction_account')
+    category = models.ForeignKey(User, on_delete=models.CASCADE, related_name='transaction_category')
 
     def __str__(self) -> str:
         return f"{self.type.capitalize()}: {self.amount} ({self.description})"
     
-
 class SavingsPlan(models.Model):
 
-    account = models.ForeignKey(Account, on_delete=models.CASCADE, related_name='savings_plans')
+    account = models.ForeignKey(Account, on_delete=models.CASCADE, related_name='savings_plans_account')
     name = models.CharField(max_length=100)
     description = models.TextField(blank=True, null=True)
     target_amount = models.DecimalField(max_digits=10, decimal_places=2)
