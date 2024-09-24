@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
+from django.core.validators import MinValueValidator
 
 class Account(models.Model):
 
@@ -26,12 +27,12 @@ class Transaction(models.Model):
         ANNUAL = 'annual', 'Annual'
 
     type = models.CharField(max_length=7, choices=Type.choices)
-    datetime = models.DateField(default=timezone.now)
-    amount = models.DecimalField(max_digits=10, decimal_places=2)
+    datetime = models.DateTimeField(auto_now_add=True)
+    amount = models.DecimalField(max_digits=10, decimal_places=2, validators=[MinValueValidator(0.01)])
     description = models.CharField(max_length=255)
     periodicity = models.CharField(max_length=7, choices=Periodicity.choices)
     account = models.ForeignKey(Account, on_delete=models.CASCADE, related_name='transaction_account')
-    category = models.ForeignKey(User, on_delete=models.CASCADE, related_name='transaction_category')
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='transaction_category')
 
     def __str__(self) -> str:
         return f"{self.type.capitalize()}: {self.amount} ({self.description})"
