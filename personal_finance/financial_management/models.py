@@ -15,28 +15,41 @@ class Category(models.Model):
     description = models.TextField(blank=True, null=True)
     #image = models.TextField(max_length=200)
 
-
 class Transaction(models.Model):
 
     class Type(models.TextChoices):
         INCOME = 'income', 'Income'
         EXPENSE = 'expense', 'Expense'
     
-    class Periodicity(models.TextChoices):
-        ONETYME = 'onetime', 'OneTime'
-        MONTHLY = 'monthly', 'Monthly'
-        ANNUAL = 'annual', 'Annual'
-
     type = models.CharField(max_length=7, choices=Type.choices)
     datetime = models.DateTimeField(auto_now_add=True)
     amount = models.DecimalField(max_digits=10, decimal_places=2, validators=[MinValueValidator(0.01)])
     description = models.CharField(max_length=255)
-    periodicity = models.CharField(max_length=7, choices=Periodicity.choices)
     account = models.ForeignKey(Account, on_delete=models.CASCADE, related_name='transaction_account')
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='transaction_category')
 
     def __str__(self) -> str:
         return f"{self.type.capitalize()}: {self.amount} ({self.description})"
+    
+class Expense(models.Model):
+    class ExpenseType(models.TextChoices):
+        DAILY = 'daily', 'Daily'
+        WEEKLY = 'weekly', 'Weekly'
+        MONTHLY = 'monthly', 'Monthly'
+        ANNUALLY = 'annually', 'Annually'
+
+    description = models.CharField(max_length=255)
+    expense_type = models.CharField(
+        max_length=10,
+        choices=ExpenseType.choices,
+        default=ExpenseType.MONTHLY,
+    )
+    amount = models.DecimalField(max_digits=10, decimal_places=2)
+    deadline = models.DateField(null=True, blank=True)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='expense_category')
+
+    def __str__(self) -> str:
+        return f"{self.description} - {self.expense_type} - {self.amount}"
     
 class SavingsPlan(models.Model):
 

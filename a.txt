@@ -1,0 +1,9 @@
+
+
+Categorias
+
+Gastos : Donde puedo poner los gastos que tengo en esta categoria (Diariamente, semanalmente, mensualment, anualmente) (Periocidad)
+- Penstaña donde poder ver los gastos, editarlos y eliminarlos. Poner una fecha a los gastos, o que sean ilimitados.
+
+Transacciones : Donde puedo ingresar dinero
+? No se si hacer que los ingresos de dinero se distribuian directamente por porcentage de gastos en las categorias o que tu ingreses directamente en la categoria el dinero.
