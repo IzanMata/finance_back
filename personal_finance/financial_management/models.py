@@ -8,12 +8,17 @@ class Account(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user')
     amount = models.DecimalField(max_digits=10, decimal_places=2)
 
+    def __str__(self) -> str:
+        return f"{self.user.email}"
 
 class Category(models.Model):
 
     name = models.CharField(max_length=100)
     description = models.TextField(blank=True, null=True)
     #image = models.TextField(max_length=200)
+    
+    def __str__(self) -> str:
+        return f"{self.name.capitalize()}"
 
 class Transaction(models.Model):
 
