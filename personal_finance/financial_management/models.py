@@ -1,11 +1,10 @@
-from django.db import models
-from django.utils import timezone
 from django.contrib.auth.models import User
 from django.core.validators import MinValueValidator
+from django.db import models
+from django.utils import timezone
 
 
 class Account(models.Model):
-
     user: User = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user")
     amount: int = models.DecimalField(max_digits=10, decimal_places=2)
 
@@ -14,9 +13,9 @@ class Account(models.Model):
 
 
 class Category(models.Model):
-
     name = models.CharField(max_length=100)
     description = models.TextField(blank=True, null=True)
+
     # image = models.TextField(max_length=200)
 
     def __str__(self) -> str:
@@ -24,7 +23,6 @@ class Category(models.Model):
 
 
 class Transaction(models.Model):
-
     class Type(models.TextChoices):
         INCOME = "income", "Income"
         EXPENSE = "expense", "Expense"
@@ -70,7 +68,6 @@ class Expense(models.Model):
 
 
 class SavingsPlan(models.Model):
-
     account = models.ForeignKey(
         Account, on_delete=models.CASCADE, related_name="savings_plans_account"
     )
