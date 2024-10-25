@@ -1,7 +1,7 @@
 # Define variables
 PYTHON = python3
-DJANGO_MANAGE = $(PYTHON) manage.py
-VENV = env
+DJANGO_MANAGE = $(PYTHON) personal_finance/manage.py
+VENV = venv
 
 # Targets
 .PHONY: all install migrate run shell test lint type-check clean
