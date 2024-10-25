@@ -17,15 +17,18 @@ expense_repository = ExpenseRepository()
 class CategoryViewset(viewsets.ModelViewSet):
     serializer_class = CategorySerializer
     queryset = category_respository.get_queryset()
-    
+
+
 class TransactionsViewset(viewsets.ModelViewSet):
     serializer_class = TransactionSerializer
     queryset = transaction_respository.get_queryset()
-    
+
+
 class AccountViewset(viewsets.ModelViewSet):
     serializer_class = AccountSerializer
     queryset = account_repository.get_queryset()
-    
+
+
 class ExpenseViewset(viewsets.ModelViewSet):
     serializer_class = ExpenseSerializer
     queryset = expense_repository.get_queryset()

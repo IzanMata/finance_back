@@ -8,28 +8,59 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('financial_management', '0004_alter_transaction_amount'),
+        ("financial_management", "0004_alter_transaction_amount"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='transaction',
-            name='periodicity',
+            model_name="transaction",
+            name="periodicity",
         ),
         migrations.AlterField(
-            model_name='transaction',
-            name='amount',
-            field=models.DecimalField(decimal_places=2, max_digits=10, validators=[django.core.validators.MinValueValidator(0.01)]),
+            model_name="transaction",
+            name="amount",
+            field=models.DecimalField(
+                decimal_places=2,
+                max_digits=10,
+                validators=[django.core.validators.MinValueValidator(0.01)],
+            ),
         ),
         migrations.CreateModel(
-            name='Expense',
+            name="Expense",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('description', models.CharField(max_length=255)),
-                ('expense_type', models.CharField(choices=[('daily', 'Daily'), ('weekly', 'Weekly'), ('monthly', 'Monthly'), ('annually', 'Annually')], default='monthly', max_length=10)),
-                ('amount', models.DecimalField(decimal_places=2, max_digits=10)),
-                ('deadline', models.DateField(blank=True, null=True)),
-                ('category', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='expense_category', to='financial_management.category')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("description", models.CharField(max_length=255)),
+                (
+                    "expense_type",
+                    models.CharField(
+                        choices=[
+                            ("daily", "Daily"),
+                            ("weekly", "Weekly"),
+                            ("monthly", "Monthly"),
+                            ("annually", "Annually"),
+                        ],
+                        default="monthly",
+                        max_length=10,
+                    ),
+                ),
+                ("amount", models.DecimalField(decimal_places=2, max_digits=10)),
+                ("deadline", models.DateField(blank=True, null=True)),
+                (
+                    "category",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="expense_category",
+                        to="financial_management.category",
+                    ),
+                ),
             ],
         ),
     ]

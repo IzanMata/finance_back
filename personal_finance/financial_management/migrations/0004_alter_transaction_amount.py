@@ -7,13 +7,17 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('financial_management', '0003_alter_transaction_datetime'),
+        ("financial_management", "0003_alter_transaction_datetime"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='transaction',
-            name='amount',
-            field=models.DecimalField(decimal_places=2, max_digits=10, validators=[django.core.validators.MinValueValidator('0.01')]),
+            model_name="transaction",
+            name="amount",
+            field=models.DecimalField(
+                decimal_places=2,
+                max_digits=10,
+                validators=[django.core.validators.MinValueValidator("0.01")],
+            ),
         ),
     ]
